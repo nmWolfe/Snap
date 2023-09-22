@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 public class CardGame {
-    private final List<Card> deckOfCards;
-    private String name;
-    private final Random rand;
+    protected final List<Card> deckOfCards;
+    protected String name;
+    protected final Random rand;
 
     public CardGame(String name){
         this.name = name;
