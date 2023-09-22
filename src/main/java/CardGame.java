@@ -2,15 +2,17 @@
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 public class CardGame {
     private final List<Card> deckOfCards;
     private String name;
+    private final Random rand;
 
     public CardGame(String name){
         this.name = name;
         this.deckOfCards = new CardDeck().getDeck();
+        this.rand = new Random();
     }
 
     public List<Card> getDeckOfCards() {
@@ -23,6 +25,9 @@ public class CardGame {
         }
     }
 
+    public Card dealCard(){
+        return deckOfCards.get(rand.nextInt(deckOfCards.size()));
+    }
 
     public void sortDeck(CardSorting cardSorting){
         switch (cardSorting) {
@@ -33,5 +38,9 @@ public class CardGame {
                 Collections.sort(deckOfCards, Comparator.comparingInt(Card::getCardValue));
                 break;
         }
+    }
+
+    public void shuffleDeck(){
+        Collections.shuffle(deckOfCards);
     }
 }
