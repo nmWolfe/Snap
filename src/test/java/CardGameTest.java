@@ -12,7 +12,7 @@ class CardGameTest {
 
     @BeforeEach
     void setUp(){
-        game = new CardGame("testGame");
+        game = new NologySnap("testGame");
     }
 
     @Test

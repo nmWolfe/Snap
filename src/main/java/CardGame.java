@@ -4,12 +4,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class CardGame {
+abstract class CardGame {
     protected final List<Card> deckOfCards;
     protected String name;
     protected final Random rand;
 
-    public CardGame(String name){
+    protected CardGame(String name){
         this.name = name;
         this.deckOfCards = new CardDeck().getDeck();
         this.rand = new Random();
@@ -41,6 +41,6 @@ public class CardGame {
     }
 
     public void shuffleDeck(){
-        Collections.shuffle(deckOfCards);
+        Collections.shuffle(this.deckOfCards);
     }
 }
