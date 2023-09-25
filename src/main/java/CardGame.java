@@ -26,7 +26,7 @@ abstract class CardGame {
     }
 
     public Card dealCard(){
-        return deckOfCards.get(rand.nextInt(deckOfCards.size()));
+        return deckOfCards.remove(rand.nextInt(deckOfCards.size()));
     }
 
     public void sortDeck(CardSorting cardSorting){

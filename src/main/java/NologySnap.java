@@ -1,8 +1,8 @@
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class NologySnap extends CardGame {
 
+    private boolean isPlaying = false;
     protected NologySnap(String name) {
         super(name);
     }
@@ -30,6 +30,7 @@ public class NologySnap extends CardGame {
                     instructions();
                     break;
                 case "play":
+                    isPlaying = true;
                     play();
                     break;
                 default:
@@ -41,12 +42,41 @@ public class NologySnap extends CardGame {
 
     }
 
-    private void play(){
-        System.out.println("** Ok let's play a game of Nology Snap **");
-        Scanner humanScanner = new Scanner(System.in);
-        while (true) {
+    private void play() {
 
-        }
+        System.out.println("** Ok let's play a game of Nology Snap **");
+
+        Scanner scanner = new Scanner(System.in);
+
+        NologySnap nologySnap = new NologySnap("Snap");
+
+        List<Card> deck = nologySnap.getDeckOfCards();
+        List<Card> table = new ArrayList<>();
+
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            Card currentCard;
+            int cardCount = 0;
+
+            @Override
+            public void run() {
+                if (cardCount < deck.size()) {
+                    currentCard = nologySnap.dealCard();
+                    table.add(currentCard);
+                    System.out.println(currentCard);
+                    cardCount++;
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 2000, 2000);
+
+
+
+
+
+
     }
 
     private void instructions() {
@@ -55,6 +85,7 @@ public class NologySnap extends CardGame {
         System.out.println("** The Object **");
         System.out.println("The goal is to win.. obviously");
         System.out.println("** The Play **");
+        System.out.println("Cards will be dealt one at a time, into the centre of the table.");
         System.out.println("The first player to \u001B[31mSMASH\u001B[0m that space bar when two card symbols match, wins.");
     }
 
