@@ -2,14 +2,16 @@ import java.util.*;
 
 public class NologySnap extends CardGame {
 
-    private boolean isPlaying = false;
+    private final PrintRules printRules = new NologyRules();
+    private Scanner scanner;
+
     protected NologySnap(String name) {
         super(name);
     }
 
     public void run() {
 
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         System.out.println("******** Welcome to Snap ********\n");
         while (true) {
 
@@ -17,11 +19,8 @@ public class NologySnap extends CardGame {
             commands();
             String command = scanner.nextLine();
 
-            if (command == null || "".equalsIgnoreCase(command)) {
-                System.out.println("Please enter a valid command");
-            } else {
-                command = command.toLowerCase().trim();
-            }
+            command = command.toLowerCase().trim();
+
             switch (Objects.requireNonNull(command)) {
                 case "exit":
                     System.out.println("smell you later.");
@@ -30,9 +29,7 @@ public class NologySnap extends CardGame {
                     instructions();
                     break;
                 case "play":
-                    isPlaying = true;
-                    play();
-                    break;
+                    multiPlayer();
                 default:
                     System.out.println("Please enter a valid command");
                     break;
@@ -42,58 +39,60 @@ public class NologySnap extends CardGame {
 
     }
 
-    private void play() {
+    private void play(boolean multiPlayer) {
 
         System.out.println("** Ok let's play a game of Nology Snap **");
 
-        Scanner scanner = new Scanner(System.in);
+        getDeckOfCards();
 
-        NologySnap nologySnap = new NologySnap("Snap");
-
-        List<Card> deck = nologySnap.getDeckOfCards();
         List<Card> table = new ArrayList<>();
 
         Timer timer = new Timer();
 
-        timer.schedule(new TimerTask() {
+        timer.scheduleAtFixedRate(new TimerTask() {
             Card currentCard;
             int cardCount = 0;
 
             @Override
             public void run() {
-                if (cardCount < deck.size()) {
-                    currentCard = nologySnap.dealCard();
+                if (cardCount < 52) {
+                    currentCard = dealCard();
                     table.add(currentCard);
                     System.out.println(currentCard);
                     cardCount++;
-
                 } else {
-                    System.out.println("It seems no one has won..");
-                    timer.cancel();
+                    System.out.println("FLIP THE DECK!");
+                    cardCount = 0;
+                    getDeckOfCards();
+                    table.clear();
                 }
             }
         }, 1000, 1000);
 
-        while (isPlaying) {
+        while (true) {
             String playerInteraction = scanner.nextLine();
-            if (!playerInteraction.isEmpty()){
-                if (table.get(table.size()-2).getCardValue() == table.get(table.size()-1).getCardValue()){
-                    System.out.println("game over you win");
-                    timer.cancel();
-                    break;
+            if (playerInteraction.isEmpty()) {
+                if (table.get(table.size() - 2).getCardValue() == table.get(table.size() - 1).getCardValue()) {
+                    if (!multiPlayer) {
+                        System.out.println("Woweeeee \u001B[31m SNAPPER \u001B[0m you win!");
+                    } else {
+                        if (table.size() % 2 != 0) {
+                            System.out.println("Player 2 \u001B[31m WHACKS \u001B[0m down a SNAP!");
+                        } else {
+                            System.out.println("Player 1 \u001B[31m WHACKS \u001B[0m down a SNAP!");
+                        }
+                    }
+                } else {
+                    System.out.println("Nice try,\u001B[31m Bucko!\u001B[0m You \u001B[31mLooooose!\u001B[0m\n");
                 }
+                timer.cancel();
+                break;
             }
         }
     }
 
     private void instructions() {
-        System.out.println("** The Pack **");
-        System.out.println("The standard 52-card pack is used.");
-        System.out.println("** The Object **");
-        System.out.println("The goal is to win.. obviously");
-        System.out.println("** The Play **");
-        System.out.println("Cards will be dealt one at a time, into the centre of the table.");
-        System.out.println("The first player to \u001B[31mSMASH\u001B[0m that space bar when two card symbols match, wins.");
+        printRules.print();
     }
 
     private void commands() {
@@ -101,4 +100,23 @@ public class NologySnap extends CardGame {
         System.out.println("\u001B[32m rules \t\tRead me the rules of Nology Snap\u001B[0m");
         System.out.println("\u001B[31m exit \t\tGet me out of here please I am scared\u001B[0m");
     }
+
+    private void multiPlayer() {
+        while (true) {
+            System.out.println("\u001B[34m 1P \u001B[0m");
+            System.out.println("\u001B[32m 2P \u001B[0m");
+            String command = scanner.nextLine();
+            switch (command.toLowerCase().trim()) {
+                case "1p":
+                    play(false);
+                    return;
+                case "2p":
+                    play(true);
+                    return;
+                default:
+                    System.out.println("Please enter a valid response");
+            }
+        }
+    }
+
 }

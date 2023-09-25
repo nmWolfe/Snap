@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 abstract class CardGame {
-    protected final List<Card> deckOfCards;
+    protected List<Card> deckOfCards;
     protected String name;
     protected final Random rand;
 
@@ -16,6 +16,7 @@ abstract class CardGame {
     }
 
     public List<Card> getDeckOfCards() {
+        deckOfCards = new CardDeck().getDeck();
         return deckOfCards;
     }
 
