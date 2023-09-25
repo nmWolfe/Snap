@@ -1,3 +1,5 @@
+package Card;
+
 public enum CardSuit {
     DIAMONDS("\u001B[31m ♢ \u001B[0m"),
     CLUBS("\u001B[30m ♧ \u001B[0m"),

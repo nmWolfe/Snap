@@ -1,4 +1,4 @@
-public class NologyRules implements PrintRules {
+public class NologyPrinter implements PrintRules {
     @Override
     public void print() {
         System.out.println("\u001B[34m** The Pack **\u001B[0m");
@@ -9,4 +9,6 @@ public class NologyRules implements PrintRules {
         System.out.println("Cards will be dealt one at a time, into the centre of the table.");
         System.out.println("The first player to \u001B[31mSMASH\u001B[0m enter when two card values match, wins.");
     }
+
+
 }

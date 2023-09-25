@@ -1,3 +1,4 @@
+import Card.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,7 +10,7 @@ abstract class CardGame {
     protected String name;
     protected final Random rand;
 
-    protected CardGame(String name){
+    public CardGame(String name){
         this.name = name;
         this.deckOfCards = new CardDeck().getDeck();
         this.rand = new Random();
@@ -33,10 +34,10 @@ abstract class CardGame {
     public void sortDeck(CardSorting cardSorting){
         switch (cardSorting) {
             case BY_SUIT:
-                Collections.sort(deckOfCards, Comparator.comparing(Card::getCardSuit));
+                deckOfCards.sort(Comparator.comparing(Card::getCardSuit));
                 break;
             case BY_VALUE:
-                Collections.sort(deckOfCards, Comparator.comparingInt(Card::getCardValue));
+                deckOfCards.sort(Comparator.comparingInt(Card::getCardValue));
                 break;
         }
     }

@@ -1,3 +1,5 @@
+package Card;
+
 public enum CardValues {
     TWO(2, "2"),
     THREE(3, "3"),

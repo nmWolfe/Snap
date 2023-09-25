@@ -1,8 +1,11 @@
+import Card.*;
+
 import java.util.Scanner;
 
 public class Snap extends CardGame {
 
     private Scanner scanner;
+    private final PrintRules printRules = new SnapPrinter();
 
     public Snap(String name) {
         super(name);
@@ -25,12 +28,7 @@ public class Snap extends CardGame {
     }
 
     private void instructions() {
-        System.out.println("** The Pack **");
-        System.out.println("The standard 52-card pack is used.");
-        System.out.println("** The Object **");
-        System.out.println("The goal is to win all of the cards");
-        System.out.println("** The Play **");
-        System.out.println("Each player is dealt cards until the deck is empty");
+        printRules.print();
     }
 
 

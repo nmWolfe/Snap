@@ -1,8 +1,10 @@
+import Card.Card;
+
 import java.util.*;
 
 public class NologySnap extends CardGame {
 
-    private final PrintRules printRules = new NologyRules();
+    private final PrintRules printRules = new NologyPrinter();
     private Scanner scanner;
 
     protected NologySnap(String name) {
