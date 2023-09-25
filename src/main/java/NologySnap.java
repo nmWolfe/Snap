@@ -55,7 +55,7 @@ public class NologySnap extends CardGame {
 
         Timer timer = new Timer();
 
-        timer.scheduleAtFixedRate(new TimerTask() {
+        timer.schedule(new TimerTask() {
             Card currentCard;
             int cardCount = 0;
 
@@ -66,17 +66,24 @@ public class NologySnap extends CardGame {
                     table.add(currentCard);
                     System.out.println(currentCard);
                     cardCount++;
+
                 } else {
+                    System.out.println("It seems no one has won..");
                     timer.cancel();
                 }
             }
-        }, 2000, 2000);
+        }, 1000, 1000);
 
-
-
-
-
-
+        while (isPlaying) {
+            String playerInteraction = scanner.nextLine();
+            if (!playerInteraction.isEmpty()){
+                if (table.get(table.size()-2).getCardValue() == table.get(table.size()-1).getCardValue()){
+                    System.out.println("game over you win");
+                    timer.cancel();
+                    break;
+                }
+            }
+        }
     }
 
     private void instructions() {
