@@ -1,3 +1,5 @@
+import Interfaces.PrintRules;
+
 public class NologyPrinter implements PrintRules {
     @Override
     public void print() {

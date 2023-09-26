@@ -1,4 +1,5 @@
 import Card.Card;
+import Interfaces.PrintRules;
 
 import java.util.*;
 
@@ -37,7 +38,7 @@ public class NologySnap extends CardGame {
 
             switch (Objects.requireNonNull(command)) {
                 case "exit":
-                    System.out.println("smell you later.");
+                    System.out.println("Returning to title..");
                     return;
                 case "rules":
                     instructions();
@@ -53,7 +54,7 @@ public class NologySnap extends CardGame {
 
     private void play(boolean multiPlayer) {
 
-        System.out.println("** Ok let's play a game of Nology Snap **");
+        System.out.println("** OK let's play a game of Nology Snap **");
 
         getDeckOfCards();
 
@@ -98,7 +99,8 @@ public class NologySnap extends CardGame {
                     System.out.println("Nice try,\u001B[31m Bucko!\u001B[0m You \u001B[31mLooooose!\u001B[0m\n");
                 }
                 timer.cancel();
-                break;
+                replay(multiPlayer);
+                return;
             }
         }
     }
@@ -127,6 +129,23 @@ public class NologySnap extends CardGame {
                     return;
                 default:
                     System.out.println("Please enter a valid response");
+            }
+        }
+    }
+
+    private void replay(boolean multiplayer){
+        while (true) {
+            System.out.println("Replay? Y / N");
+            String command = scanner.nextLine();
+            switch (command.toLowerCase().trim()){
+                case "y":
+                    play(multiplayer);
+                    break;
+                case "n":
+                    System.out.println("See ya!");
+                    return;
+                default:
+                    System.out.println("Enter Y or N");
             }
         }
     }

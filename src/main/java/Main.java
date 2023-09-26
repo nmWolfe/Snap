@@ -47,7 +47,7 @@ public class Main {
 
             switch (Objects.requireNonNull(command)) {
                 case "3":
-                    System.out.println("smell you later.");
+                    System.out.println("Smell You Later... ");
                     return;
                 case "1":
                     nologySnap.run();

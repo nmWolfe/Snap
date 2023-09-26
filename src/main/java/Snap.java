@@ -1,7 +1,7 @@
-import Card.*;
+import Card.Card;
+import Interfaces.PrintRules;
 
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Snap extends CardGame {
 
@@ -33,7 +33,7 @@ public class Snap extends CardGame {
 
             switch (Objects.requireNonNull(command)) {
                 case "exit":
-                    System.out.println("smell you later.");
+                    System.out.println("Returning to title..");
                     return;
                 case "rules":
                     instructions();
@@ -50,6 +50,14 @@ public class Snap extends CardGame {
     }
 
     public void play(boolean multiplayer){
+        System.out.println("** OK let's play some classic Snap **");
+
+        getDeckOfCards();
+
+        List<Card> table = new ArrayList<>();
+
+        Timer timer = new Timer();
+
 
     }
     private void commands() {
@@ -79,5 +87,20 @@ public class Snap extends CardGame {
         }
     }
 
-
+    private void replay(boolean multiplayer){
+        while (true) {
+            System.out.println("Replay? Y / N");
+            String command = scanner.nextLine();
+            switch (command.toLowerCase().trim()){
+                case "y":
+                    play(multiplayer);
+                    break;
+                case "n":
+                    System.out.println("See ya!");
+                    return;
+                default:
+                    System.out.println("Enter Y or N");
+            }
+        }
+    }
 }

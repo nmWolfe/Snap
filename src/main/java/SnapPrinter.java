@@ -1,4 +1,6 @@
-public class SnapPrinter implements PrintRules{
+import Interfaces.PrintRules;
+
+public class SnapPrinter implements PrintRules {
     @Override
     public void print() {
         System.out.println("\u001B[34m** The Pack **\u001B[0m");
