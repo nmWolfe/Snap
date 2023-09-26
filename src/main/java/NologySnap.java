@@ -5,6 +5,7 @@ import java.util.*;
 public class NologySnap extends CardGame {
 
     private final PrintRules printRules = new NologyPrinter();
+
     private Scanner scanner;
 
     protected NologySnap(String name) {
@@ -14,7 +15,18 @@ public class NologySnap extends CardGame {
     public void run() {
 
         scanner = new Scanner(System.in);
-        System.out.println("******** Welcome to Snap ********\n");
+        System.out.println("\n                           $$\\                                      $$$$$$\\                                $$\\ \n" +
+                "                           $$ |                                    $$  __$$\\                               $$ |\n" +
+                "       $$$$$$$\\   $$$$$$\\  $$ | $$$$$$\\   $$$$$$\\  $$\\   $$\\       $$ /  \\__|$$$$$$$\\   $$$$$$\\   $$$$$$\\  $$ |\n" +
+                "       $$  __$$\\ $$  __$$\\ $$ |$$  __$$\\ $$  __$$\\ $$ |  $$ |      \\$$$$$$\\  $$  __$$\\  \\____$$\\ $$  __$$\\ $$ |\n" +
+                "       $$ |  $$ |$$ /  $$ |$$ |$$ /  $$ |$$ /  $$ |$$ |  $$ |       \\____$$\\ $$ |  $$ | $$$$$$$ |$$ /  $$ |\\__|\n" +
+                "       $$ |  $$ |$$ |  $$ |$$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |      $$\\   $$ |$$ |  $$ |$$  __$$ |$$ |  $$ |    \n" +
+                "       $$ |  $$ |\\$$$$$$  |$$ |\\$$$$$$  |\\$$$$$$$ |\\$$$$$$$ |      \\$$$$$$  |$$ |  $$ |\\$$$$$$$ |$$$$$$$  |$$\\ \n" +
+                "$$$$$$\\\\__|  \\__| \\______/ \\__| \\______/  \\____$$ | \\____$$ |       \\______/ \\__|  \\__| \\_______|$$  ____/ \\__|\n" +
+                "\\______|                                 $$\\   $$ |$$\\   $$ |                                    $$ |          \n" +
+                "                                         \\$$$$$$  |\\$$$$$$  |                                    $$ |          \n" +
+                "                                          \\______/  \\______/                                     \\__|");
+
         while (true) {
 
             System.out.println("Please enter a command to continue: \n");
@@ -36,9 +48,7 @@ public class NologySnap extends CardGame {
                     System.out.println("Please enter a valid command");
                     break;
             }
-
         }
-
     }
 
     private void play(boolean multiPlayer) {
@@ -99,7 +109,7 @@ public class NologySnap extends CardGame {
 
     private void commands() {
         System.out.println("\u001B[34m play \t\tPlay a game of Nology Snap\u001B[0m");
-        System.out.println("\u001B[32m rules \t\tRead me the rules of Nology Snap\u001B[0m");
+        System.out.println("\u001B[32m rules \t\tRead me the rules of _nology Snap\u001B[0m");
         System.out.println("\u001B[31m exit \t\tGet me out of here please I am scared\u001B[0m");
     }
 
