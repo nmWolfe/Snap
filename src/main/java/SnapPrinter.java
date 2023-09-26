@@ -11,6 +11,6 @@ public class SnapPrinter implements PrintRules {
         System.out.println("Each player is dealt cards until the deck is empty");
         System.out.println("Each player then plays one card from their deck");
         System.out.println("The player who calls the snap, gains all the cards currently on the table");
-        System.out.println("Whoever has all the cards wins!!!");
+        System.out.println("Whoever has all the cards wins!!!\n");
     }
 }

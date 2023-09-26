@@ -1,3 +1,4 @@
+import Card.CardSorting;
 import Story.Story;
 
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class Main {
             command = command.toLowerCase().trim();
 
             switch (Objects.requireNonNull(command)) {
-                case "3":
+                case "5":
                     System.out.println("Smell You Later... ");
                     return;
                 case "1":
@@ -54,6 +55,14 @@ public class Main {
                     break;
                 case "2":
                     snap.run();
+                    break;
+                case "3":
+                    snap.sortDeck(CardSorting.BY_SUIT);
+                    snap.displayDeck();
+                    break;
+                case "4":
+                    nologySnap.shuffleDeck();
+                    nologySnap.displayDeck();
                     break;
                 case "starwars":
                     story.readStory();
@@ -68,6 +77,8 @@ public class Main {
     private static void commands(){
         System.out.println("\u001B[34m1\t\tPlay a game of _nology Snap\u001B[0m");
         System.out.println("\u001B[32m2\t\tPlay a game of regular Snap\u001B[0m");
-        System.out.println("\u001B[31m3\t\tExit this whole shabang\u001B[0m");
+        System.out.println("\u001B[33m3\t\tShow me the Deck!\u001B[0m");
+        System.out.println("\u001B[35m4\t\tShow me the Shuffled Deck!\u001B[0m");
+        System.out.println("\u001B[31m5\t\tExit this whole shabang\u001B[0m");
     }
 }

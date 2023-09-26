@@ -7,6 +7,8 @@ public class NologySnap extends CardGame {
 
     private final PrintRules printRules = new NologyPrinter();
 
+    private boolean computerWin;
+
     private Scanner scanner;
 
     protected NologySnap(String name) {
@@ -37,7 +39,7 @@ public class NologySnap extends CardGame {
             command = command.toLowerCase().trim();
 
             switch (Objects.requireNonNull(command)) {
-                case "exit":
+                case "back":
                     System.out.println("Returning to title..");
                     return;
                 case "rules":
@@ -57,17 +59,20 @@ public class NologySnap extends CardGame {
         System.out.println("** OK let's play a game of Nology Snap **");
 
         getDeckOfCards();
+        computerWin = false;
 
         List<Card> table = new ArrayList<>();
 
         Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
+
             Card currentCard;
             int cardCount = 0;
 
             @Override
             public void run() {
+
                 if (cardCount < 52) {
                     currentCard = dealCard();
                     table.add(currentCard);
@@ -79,25 +84,52 @@ public class NologySnap extends CardGame {
                     getDeckOfCards();
                     table.clear();
                 }
+
+                if (!multiPlayer){
+
+                    if (table.size() > 2 && (table.get(table.size() - 2).getCardValue() == table.get(table.size() - 1).getCardValue())) {
+                        System.out.println("Computer SNAPS it up!");
+                        computerWin = true;
+                        timer.cancel();
+
+                    }
+                }
+
             }
         }, 1000, 1000);
 
         while (true) {
+
             String playerInteraction = scanner.nextLine();
+
             if (playerInteraction.isEmpty()) {
+
+                if (computerWin){
+                    replay(multiPlayer);
+                    return;
+                }
+
+                if (table.isEmpty()) {
+                    continue;
+                }
                 if (table.get(table.size() - 2).getCardValue() == table.get(table.size() - 1).getCardValue()) {
+
                     if (!multiPlayer) {
                         System.out.println("Woweeeee \u001B[31m SNAPPER \u001B[0m you win!");
+
                     } else {
+
                         if (table.size() % 2 != 0) {
-                            System.out.println("Player 2 \u001B[31m WHACKS \u001B[0m down a SNAP!");
+                            System.out.println("Player 2 \u001B[31m WHACKS \u001B[0m down a SNAP and wins!");
                         } else {
-                            System.out.println("Player 1 \u001B[31m WHACKS \u001B[0m down a SNAP!");
+                            System.out.println("Player 1 \u001B[31m WHACKS \u001B[0m down a SNAP and wins!");
                         }
                     }
+
                 } else {
                     System.out.println("Nice try,\u001B[31m Bucko!\u001B[0m You \u001B[31mLooooose!\u001B[0m\n");
                 }
+
                 timer.cancel();
                 replay(multiPlayer);
                 return;
@@ -112,7 +144,7 @@ public class NologySnap extends CardGame {
     private void commands() {
         System.out.println("\u001B[34m play \t\tPlay a game of Nology Snap\u001B[0m");
         System.out.println("\u001B[32m rules \t\tRead me the rules of _nology Snap\u001B[0m");
-        System.out.println("\u001B[31m exit \t\tGet me out of here please I am scared\u001B[0m");
+        System.out.println("\u001B[31m back \t\tGet me out of here please I am scared\u001B[0m");
     }
 
     private void multiPlayer() {
@@ -133,11 +165,11 @@ public class NologySnap extends CardGame {
         }
     }
 
-    private void replay(boolean multiplayer){
+    private void replay(boolean multiplayer) {
         while (true) {
             System.out.println("Replay? Y / N");
             String command = scanner.nextLine();
-            switch (command.toLowerCase().trim()){
+            switch (command.toLowerCase().trim()) {
                 case "y":
                     play(multiplayer);
                     break;

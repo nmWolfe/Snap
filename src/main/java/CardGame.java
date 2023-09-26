@@ -21,10 +21,20 @@ abstract class CardGame {
         return deckOfCards;
     }
 
+    public void setDeckOfCards(List<Card> deckOfCards) {
+        this.deckOfCards = deckOfCards;
+    }
+
     public void displayDeck(){
+        int count = 0;
         for (Card card: deckOfCards) {
-            System.out.println(card);
+            System.out.print(card + " ");
+            count++;
+            if (count % 13 == 0){
+                System.out.println();
+            }
         }
+        System.out.println();
     }
 
     public Card dealCard(){
