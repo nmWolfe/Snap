@@ -1,4 +1,4 @@
-![](/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.32.44.png)
+<img src="/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.32.44.png"/>
 
 
 # Snap!
@@ -20,13 +20,13 @@
 Snap - a Java-based project that allows you to enjoy two variations of the popular Snap card game.
 Offering or a challenging game against the computer or a fun multiplayer experience.
 
-![](/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.01.png)
+<img src="/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.01.png"/>
 
 ## Gameplay
 
 ### _nology Snap
 
-![](/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.14.png)
+<img src="/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.14.png"/>
 
 In _nology Snap, the gameplay is as follows:
 
@@ -37,7 +37,7 @@ In _nology Snap, the gameplay is as follows:
 
 ### Regular Snap
 
-![](/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.25.png)
+<img src="/Users/nmp/Desktop/Screenshot 2023-09-27 at 15.33.25.png"/>
 
 In Regular Snap, the gameplay differs slightly:
 
