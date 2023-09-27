@@ -66,7 +66,7 @@ public class Main {
                     break;
                 case "starwars":
                     story.readStory();
-                    break;
+                    return;
                 default:
                     System.out.println("Please enter a valid command");
                     break;

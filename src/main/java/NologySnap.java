@@ -31,7 +31,7 @@ public class NologySnap extends CardGame implements Game {
                 "$$$$$$\\\\__|  \\__| \\______/ \\__| \\______/  \\____$$ | \\____$$ |       \\______/ \\__|  \\__| \\_______|$$  ____/ \\__|\n" +
                 "\\______|                                 $$\\   $$ |$$\\   $$ |                                    $$ |          \n" +
                 "                                         \\$$$$$$  |\\$$$$$$  |                                    $$ |          \n" +
-                "                                          \\______/  \\______/                                     \\__|");
+                "                                          \\______/  \\______/                                     \\__|\n");
 
         while (true) {
 
@@ -79,22 +79,26 @@ public class NologySnap extends CardGame implements Game {
             public void run() {
 
                 if (cardCount < 52) {
+
                     currentCard = dealCard();
                     table.add(currentCard);
                     System.out.println(currentCard);
                     cardCount++;
+
                 } else {
+
                     System.out.println("FLIP THE DECK!");
                     cardCount = 0;
                     getDeckOfCards();
                     table.clear();
+
                 }
 
                 if (!multiPlayer){
 
                     if (table.size() > 2 && (table.get(table.size() - 3).getCardValue() == table.get(table.size() - 2).getCardValue())) {
 
-                        System.out.println("\b");
+                        System.out.println("\b\b");
                         System.out.println("Computer SNAPS it up!");
                         computerWin = true;
                         timer.cancel();
