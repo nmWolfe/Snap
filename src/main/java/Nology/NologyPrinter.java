@@ -1,3 +1,5 @@
+package Nology;
+
 import Interfaces.PrintRules;
 
 public class NologyPrinter implements PrintRules {
@@ -9,7 +11,7 @@ public class NologyPrinter implements PrintRules {
         System.out.println("The goal is to win.. obviously");
         System.out.println("\u001B[31m** The Play **\u001B[0m");
         System.out.println("Cards will be dealt one at a time, into the centre of the table.");
-        System.out.println("The first player to \u001B[31mSMASH\u001B[0m enter when two card values match, wins.");
+        System.out.println("The first player to \u001B[31mSMASH\u001B[0m enter when two card values match, wins.\n");
     }
 
 

@@ -1,9 +1,11 @@
 import Card.Card;
+import Interfaces.Game;
 import Interfaces.PrintRules;
+import Nology.NologyPrinter;
 
 import java.util.*;
 
-public class NologySnap extends CardGame {
+public class NologySnap extends CardGame implements Game {
 
     private final PrintRules printRules = new NologyPrinter();
 
@@ -15,6 +17,7 @@ public class NologySnap extends CardGame {
         super(name);
     }
 
+    @Override
     public void run() {
 
         scanner = new Scanner(System.in);
@@ -47,6 +50,7 @@ public class NologySnap extends CardGame {
                     break;
                 case "play":
                     multiPlayer();
+                    break;
                 default:
                     System.out.println("Please enter a valid command");
                     break;
@@ -54,7 +58,8 @@ public class NologySnap extends CardGame {
         }
     }
 
-    private void play(boolean multiPlayer) {
+    @Override
+    public void play(boolean multiPlayer) {
 
         System.out.println("** OK let's play a game of Nology Snap **");
 
@@ -87,7 +92,9 @@ public class NologySnap extends CardGame {
 
                 if (!multiPlayer){
 
-                    if (table.size() > 2 && (table.get(table.size() - 2).getCardValue() == table.get(table.size() - 1).getCardValue())) {
+                    if (table.size() > 2 && (table.get(table.size() - 3).getCardValue() == table.get(table.size() - 2).getCardValue())) {
+
+                        System.out.println("\b");
                         System.out.println("Computer SNAPS it up!");
                         computerWin = true;
                         timer.cancel();
@@ -120,9 +127,13 @@ public class NologySnap extends CardGame {
                     } else {
 
                         if (table.size() % 2 != 0) {
+
                             System.out.println("Player 2 \u001B[31m WHACKS \u001B[0m down a SNAP and wins!");
+
                         } else {
+
                             System.out.println("Player 1 \u001B[31m WHACKS \u001B[0m down a SNAP and wins!");
+
                         }
                     }
 

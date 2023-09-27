@@ -1,9 +1,11 @@
 import Card.Card;
+import Interfaces.Game;
+import Snap.SnapPrinter;
 import Interfaces.PrintRules;
 
 import java.util.*;
 
-public class Snap extends CardGame {
+public class Snap extends CardGame implements Game {
 
     private final PrintRules printRules = new SnapPrinter();
     private Scanner scanner;
@@ -12,6 +14,7 @@ public class Snap extends CardGame {
         super(name);
     }
 
+    @Override
     public void run() {
         scanner = new Scanner(System.in);
         System.out.println("\n $$$$$$\\                                $$\\ \n" +
@@ -40,6 +43,7 @@ public class Snap extends CardGame {
                     break;
                 case "play":
                     multiPlayer();
+                    break;
                 default:
                     System.out.println("Please enter a valid command");
                     break;
@@ -49,12 +53,12 @@ public class Snap extends CardGame {
 
     }
 
-    public void play(boolean multiplayer){
+    @Override
+    public void play(boolean multiplayer) {
 
         System.out.println("** OK let's play some classic Snap **");
 
         List<Card> table = new ArrayList<>();
-        List<Card> deck = new ArrayList<>();
 
         Snap snap = new Snap("Snap");
         snap.getDeckOfCards();
@@ -80,63 +84,85 @@ public class Snap extends CardGame {
                     cardCount++;
 
                 } else {
-                    scoreChecker(playerOneCards, playerTwoCards, multiplayer);
+
+                    timer.cancel();
+                    return;
+
                 }
+
+                if (!multiplayer) {
+
+                    if (table.size() > 2 && (table.get(table.size() - 3).getCardValue() == table.get(table.size() - 2).getCardValue())) {
+
+                        System.out.println("Computer SNAPS it up!");
+                        playerTwoCards.addAll(table);
+                        table.clear();
+
+                    }
+                }
+
             }
         }, 1000, 1000);
 
-        while (true) {
+        boolean gameOver = false;
+
+        while (!gameOver) {
 
             String playerInteraction = scanner.nextLine();
-            if (playerInteraction.isEmpty()) {
 
-                if (table.isEmpty()){
-                    continue;
-                }
+            if (playerInteraction.isEmpty()) {
 
                 if (table.get(table.size() - 2).getCardValue() == table.get(table.size() - 1).getCardValue()) {
 
-                    if (!multiplayer){
+                    if (!multiplayer) {
 
                         playerOneCards.addAll(table);
                         table.clear();
                         System.out.println("SNAP - Table cleared!");
-                        continue;
 
                     } else {
 
                         if (table.size() % 2 != 0) {
+
                             System.out.println("Player 2 \u001B[31m WHACKS \u001B[0m down a SNAP!");
                             playerTwoCards.addAll(table);
-                            table.clear();
 
                         } else {
+
                             System.out.println("Player 1 \u001B[31m WHACKS \u001B[0m down a SNAP!");
                             playerOneCards.addAll(table);
-                            table.clear();
+
                         }
+                        table.clear();
                     }
                 }
             } else {
 
-                System.out.println("Nice try,\u001B[31m Bucko!\u001B[0m You \u001B[31mLooooose!\u001B[0m\n");
+                System.out.println("Nice try,\u001B[31m Bucko!\u001B[0m");
 
             }
-            timer.cancel();
-            replay(multiplayer);
-            return;
+
+            if (table.size() + playerOneCards.size() + playerTwoCards.size() == 52) {
+                gameOver = true;
+            }
+
         }
-
-
+        timer.cancel();
+        scoreChecker(playerOneCards, playerTwoCards, multiplayer);
+        replay(multiplayer);
     }
+
+
     private void commands() {
         System.out.println("\u001B[34m play \t\tPlay a game of Snap\u001B[0m");
         System.out.println("\u001B[32m rules \t\tRead me the rules of Snap\u001B[0m");
         System.out.println("\u001B[31m back \t\tGet me out of here please I am scared\u001B[0m");
     }
+
     private void instructions() {
         printRules.print();
     }
+
     private void multiPlayer() {
         while (true) {
             System.out.println("\u001B[34m 1P \u001B[0m");
@@ -154,26 +180,27 @@ public class Snap extends CardGame {
             }
         }
     }
-    private void scoreChecker(List<Card> p1, List<Card> p2, boolean multiplayer){
+
+    private void scoreChecker(List<Card> p1, List<Card> p2, boolean multiplayer) {
         System.out.println("Who has the most cards?");
-        if (p1.size() > p2.size()){
+        if (p1.size() > p2.size()) {
             System.out.println("Player One. You are the WINNER!");
-        } else if (multiplayer){
+        } else if (multiplayer) {
             System.out.println("Player Two! You are the WINNER!");
-        } else if (p1.size() == p2.size()){
+        } else if (p1.size() == p2.size()) {
             System.out.println("Well I'll be. It's a DRAW!");
         } else {
             System.out.println("Computer always wins.");
         }
-        replay(multiplayer);
     }
-    private void replay(boolean multiplayer){
+
+    private void replay(boolean multiplayer) {
         while (true) {
 
             System.out.println("Replay? Y / N");
             String command = scanner.nextLine().trim().toLowerCase();
 
-            switch (command){
+            switch (command) {
                 case "y":
                     play(multiplayer);
                     break;
