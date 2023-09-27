@@ -17,7 +17,7 @@
 ## About
 
 Snap - a Java-based project that allows you to enjoy two variations of the popular Snap card game.
-Offering or a challenging game against the computer or a fun multiplayer experience.
+Offering a challenging game against the computer, or a fun multiplayer experience.
 
 ![Screenshot 2023-09-27 at 15 33 01](https://github.com/nmWolfe/Snap/assets/125403716/6d1ff792-2369-469e-82a1-fb0e2ad31f32)
 
